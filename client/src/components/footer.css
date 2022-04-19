@@ -1,0 +1,18 @@
+ #main-footer{
+    position: fixed;
+    background-color: black;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+#sec1,#sec2,#sec3{
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+span{
+    font-weight: bolder;
+} 
+

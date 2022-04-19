@@ -1,0 +1,20 @@
+.navbar h2{
+text-align:center;
+color: darkblue;
+text-transform: uppercase;
+font-style:italic;
+text-shadow: 2px 2px rgb(185, 98, 98);
+
+}
+
+.navbar{
+    /* background-color: #c2b7d6; */
+    background-color: #f6b319;
+}
+
+#btn-log, #btn-signup{
+    font-weight: bolder;
+    color: white;
+    
+    
+}
