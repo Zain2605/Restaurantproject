@@ -1,15 +1,18 @@
-const connectdb=require('./db')
-//const app = require("./src/app");
-//const app = express(); 
+const express = require('express');
+const app = express(); 
+const connectdb = require('./db')
+
+const Menu = require('./models/menumodel');
+const port = 5000;
 connectdb();
 
-// const port = 5000;
+app.get('/menu', async (req, res) => {
+    const menus = await Menu.find({});
+    console.log(menus);
+    res.json(menus);
+});
 
-// const router = require('./routes');
 
-
-// app.use('/menu', router);
-
-// app.listen(process.env.PORT || port, () => {
-//     console.log(`Listening on port no ${port}`);
-// });
+app.listen(process.env.PORT || port, () => {
+    console.log(`Listening on port no ${port}`);
+});

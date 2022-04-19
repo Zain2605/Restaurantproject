@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
         //     },
         //   },
         // ])
-        .find()
+        .find()  
         .exec()
         .then((doc) => {
           //res.status(200).send(doc);
