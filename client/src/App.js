@@ -14,13 +14,13 @@ import axios from 'axios'
 
 function App() {
 
-  // const[menuitems,setmenuitems]=useState([]);
-  // useEffect(() =>{
-  //    axios
-  //     .get("http://localhost:5000/api/menu")
-  //     .then(res => setmenuitems(res.json(data)))
-  //     .catch(error => console.log(error))
-  // });
+  const[menuitems,setmenuitems]=useState([]);
+  useEffect(() =>{
+    const mydata= axios
+      .get("http://localhost:5000/api/menu");
+      axios.then(res => setmenuitems(res.json(mydata)))
+      .catch(error => console.log(error))
+  });
   return (
    <>
     <Router>
@@ -29,8 +29,8 @@ function App() {
       <Route  path="/" element={<Maincontent/>} />
       <Route  path="/login" element={<Login/>} />
       <Route  path="/signup" element={<Signup/>} />
-      {/* <Route path="/menu" render={() => <Menu menuitems={menuitems}/>} /> */}
-      <Route path="/menu" element={<Menu/>}/>
+      <Route path="/menu" render={() => <Menu menuitems={menuitems}/>} />
+      {/* <Route path="/menu" element={<Menu/>}/> */}
       </Routes>
       <Footer/>
     </Router>

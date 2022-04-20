@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function menu() {
+export default function menu({menuitems}) {
   return (
     <>
       <div className="container mt-5">
@@ -14,7 +14,9 @@ export default function menu() {
           </tr>
         </thead>
         <tbody>
-          {/* {menuitems.map((item,key)=>{
+          
+          {menuitems.map((item,key)=>{
+            return(
             <div>
                 <tr key={key}>
                   <td> {key + 1} </td>
@@ -24,10 +26,10 @@ export default function menu() {
                 </tr> 
             </div>
               
-          })} */}
+          )})}
            
           
-          <tr>
+          {/* <tr>
             <th scope="row">1</th>
             <td>Mark</td>
             <td>Otto</td>
@@ -44,7 +46,7 @@ export default function menu() {
             <td>Larry</td>
             <td>the Bird</td>
             <td>@twitter</td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
       </div>
