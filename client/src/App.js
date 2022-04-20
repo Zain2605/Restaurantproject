@@ -15,11 +15,13 @@ import axios from 'axios'
 function App() {
 
   const[menuitems,setmenuitems]=useState([]);
-  useEffect(() =>{
-    const mydata= axios
+  useEffect( () =>{
+    const mydata= async()=>{
+      await axios
       .get("http://localhost:5000/api/menu");
       axios.then(res => setmenuitems(res.json(mydata)))
       .catch(error => console.log(error))
+    }
   });
   return (
    <>
