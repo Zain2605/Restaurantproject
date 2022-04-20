@@ -4,16 +4,6 @@ const menumodel = require('../models/menumodel')
 router.get("/", async (req, res) => {
     try {
       await menumodel
-        // .aggregate([
-        //   {
-        //     $lookup: {
-        //       from: "answers", //collection to join
-        //       localField: "_id", //field from input document
-        //       foreignField: "questionId",
-        //       as: "allAnswers", //output array field
-        //     },
-        //   },
-        // ])
         .find()  
         .exec()
         .then((doc) => {
