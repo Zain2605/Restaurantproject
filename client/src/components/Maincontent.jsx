@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './Maincontent.css'
 export default function Maincontent() {
   return (
@@ -10,7 +11,15 @@ export default function Maincontent() {
 
     <div id="home-tiles" className="row ">
       <div className="col-md-4 col-sm-6 col-xs-12">
-        <a href="menu-categories.html"><div id="menu-tile"><span>menu</span></div></a>
+        {/* <a href="menu-categories.html"><div id="menu-tile"><span>menu</span></div></a> */}
+        
+          {/* <span>menu</span> */}
+          {/* <NavLink to="/menu"><span>menu</span></NavLink> */}
+          <nav>
+            <Link to="/menu"><div id="menu-tile"><span>menu</span></div></Link>
+          </nav>
+         {/* <NavLink to={"/menu"} Menu /> */}
+         {/* </div> */}
       </div>
       <div className="col-md-4 col-sm-6 col-xs-12">
         <a href="single-category.html"><div id="specials-tile"><span>specials</span></div></a>
