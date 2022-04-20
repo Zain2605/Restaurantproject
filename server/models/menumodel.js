@@ -11,6 +11,5 @@ const MenuSchema = mongoose.Schema(
         Price: Number
     }
 );
-
-const Menu = mongoose.model("Menu", MenuSchema);
-module.exports=Menu;
+const Menu = new mongoose.model("Menu", MenuSchema);
+module.exports = Menu;
