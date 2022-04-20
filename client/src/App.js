@@ -8,16 +8,20 @@ import Maincontent from './components/Maincontent';
 import Footer from './components/Footer';
 import Login from './pages/Login';
 import Signup from "./pages/Signup"
+import Menu from './pages/menu';
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 
 function App() {
 
-  const [menu,setmenu]=useState();
-  useEffect(() =>{
-    axios.get('http://localhost:8080')
-    .then(res => setmenu(res.data))
-    .catch(err => console.log(err));
+  const[menuitems,setmenuitems]=useState([]);
+  useEffect( () =>{
+    const mydata= async()=>{
+      await axios
+      .get("http://localhost:5000/api/menu");
+      axios.then(res => setmenuitems(res.json(mydata)))
+      .catch(error => console.log(error))
+    }
   });
   return (
    <>
@@ -27,7 +31,8 @@ function App() {
       <Route  path="/" element={<Maincontent/>} />
       <Route  path="/login" element={<Login/>} />
       <Route  path="/signup" element={<Signup/>} />
-
+      <Route path="/menu" render={() => <Menu menuitems={menuitems}/>} />
+      {/* <Route path="/menu" element={<Menu/>}/> */}
       </Routes>
       <Footer/>
     </Router>
