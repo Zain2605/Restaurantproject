@@ -3,9 +3,9 @@ const { welcomeMail } = require("../alerts/alert");
 const User = require("../models/userModel");
 const generateToken = require("../utils/generateToken");
 
-//@description     Auth the user
-//@route           POST /api/users/login
-//@access          Public
+// //@description     Auth the user
+// //@route           POST /api/users/login
+// //@access          Public
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -18,22 +18,23 @@ const authUser = asyncHandler(async (req, res) => {
       email: user.email,
       token: generateToken(user._id),
     });
+      res.status(200).send();
   } else {
-    res.status(401);
-    throw new Error("Invalid Email or Password");
+      res.status(401).send();
   }
 });
 
-//@description     Register new user
-//@route           POST /api/users/
-//@access          Public
+// //@description     Register new user
+// //@route           POST /api/users/
+// //@access          Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password, pic } = req.body;
-
+  const { name, email, password } = req.body;
+    console.log(req.body);
   const userExists = await User.findOne({ email });
 
   if (userExists) {
     res.status(404);
+    console.log("Already Exists");
     throw new Error("User already exists");
   }
 
@@ -50,7 +51,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       token: generateToken(user._id),
     });
-    welcomeMail(email, name);
+    
   } else {
     res.status(400);
     throw new Error("User not found");

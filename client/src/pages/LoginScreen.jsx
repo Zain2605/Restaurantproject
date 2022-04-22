@@ -7,6 +7,7 @@ import ErrorMessage from "../components/ErrorMessage";
 import { login } from "../actions/userActions";
 import MainScreen from "../components/MainScreen";
 import "./LoginScreen.css";
+import axios from "axios";
 
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -22,9 +23,26 @@ const LoginScreen = ({ history }) => {
     }
   }, [history, userInfo]);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(login(email, password));
+  const submitHandler = async (e) => {
+      e.preventDefault();
+      const body = {
+        
+        email, 
+        password
+    }
+    await axios.post('http://localhost:5000/users/login', body).then((res) =>
+    {
+        console.log(res.data);
+        console.log(res.status);
+        if (res.status == 200) {
+            alert("Login Successful");
+        }
+        else alert("Login Failed");
+        
+    }).catch((e) => {
+        alert("Login Failed");
+        console.log("Error :- ", e);
+    })
   };
 
   return (

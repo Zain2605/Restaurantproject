@@ -7,6 +7,7 @@ import ErrorMessage from "../components/ErrorMessage";
 import { register } from "../actions/userActions";
 import MainScreen from "../components/MainScreen";
 import "./RegisterScreen.css";
+import axios from "axios";
 
 const RegisterScreen = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -26,14 +27,26 @@ const RegisterScreen = ({ history }) => {
     }
   }, [history, userInfo]);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
     if (password !== confirmpassword) {
       setMessage("Passwords do not match");
       console.log("Passwords dont match");
     } else {
-      dispatch(register(name, email, password));
+        const body = {
+            name: name, 
+            email: email, 
+            password : password
+        }
+        await axios.post('http://localhost:5000/users/RegisterScreen', body).then((res) =>
+            {
+                console.log(res.data);
+                
+               
+            }).catch((e) => {
+                console.log("Error :- ", e);
+            })
     }
   };
 
