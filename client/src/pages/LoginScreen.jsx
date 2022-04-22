@@ -23,27 +23,26 @@ const LoginScreen = ({ history }) => {
     }
   }, [history, userInfo]);
 
-  const submitHandler = async (e) => {
-      e.preventDefault();
-      const body = {
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        const body = {
         
-        email, 
-        password
-    }
-    await axios.post('http://localhost:5000/users/login', body).then((res) =>
-    {
-        console.log(res.data);
-        console.log(res.status);
-        if (res.status == 200) {
-            alert("Login Successful");
+            email,
+            password
         }
-        else alert("Login Failed");
+        await axios.post('http://localhost:5000/users/login', body).then((res) => {
+            console.log(res.data);
+            console.log(res.status);
+            if (res.status == 200) {
+                alert("Login Successful");
+            }
+            else alert("Login Failed");
         
-    }).catch((e) => {
-        alert("Login Failed");
-        console.log("Error :- ", e);
-    })
-  };
+        }).catch((e) => {
+            alert("Login Failed");
+            console.log("Error :- ", e);
+        })
+    }; 
 
   return (
     <MainScreen title="LOGIN">
