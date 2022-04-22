@@ -37,7 +37,7 @@ export default function Landing() {
       <form className="d-flex">
         {/* <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/> */}
         <NavLink to={"/login"}><button className="btn btn-outline-dark m-3" id="btn-log" type="submit" >Login </button></NavLink>
-        <NavLink to={"/signup"}><button className="btn btn-outline-dark m-3" id="btn-signup" type="submit">Sign Up</button></NavLink>
+        <NavLink to={"/RegisterScreen"}><button className="btn btn-outline-dark m-3" id="btn-signup" type="submit">Sign Up</button></NavLink>
       </form>
     </div>
   {/* </div> */}

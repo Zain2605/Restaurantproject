@@ -22,6 +22,8 @@ app.get('/menu', async (req, res) => {
     res.json(menus);
 });
 
+const usersRoutes = require("./routes/usersRoutes");
+app.use("/users", usersRoutes);
 
 app.listen(process.env.PORT || port, () => {
     console.log(`Listening on port no ${port}`);

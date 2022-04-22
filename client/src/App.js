@@ -6,9 +6,11 @@ import Mynavbar from './components/Mynavbar';
 import Landing from './components/Landing';
 import Maincontent from './components/Maincontent';
 import Footer from './components/Footer';
-import Login from './pages/Login';
+//import Login from './pages/Login';
 import Signup from "./pages/Signup"
 import Menu from './pages/menu';
+import RegisterScreen from './pages/RegisterScreen';
+import LoginScreen from './pages/LoginScreen';
 
 
 function App() {
@@ -20,8 +22,10 @@ function App() {
       <Landing/>
       <Routes>
       <Route  path="/" element={<Maincontent/>} />
-      <Route  path="/login" element={<Login/>} />
-      <Route  path="/signup" element={<Signup/>} />
+      {/* <Route  path="/login" element={<Login/>} /> */}
+      {/* <Route  path="/signup" element={<Signup/>} /> */}
+      <Route  path="/RegisterScreen" element={<RegisterScreen/>} />
+      <Route  path="/login" element={<LoginScreen/>} />
       {/* <Route path="/menu" render={() => <Menu menuitems={menuitems}/>} /> */}
       <Route path="/menu" element={<Menu/>}/>
       </Routes>
