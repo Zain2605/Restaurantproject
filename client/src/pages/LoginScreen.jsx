@@ -19,7 +19,7 @@ const LoginScreen = ({ history }) => {
 
   useEffect(() => {
     if (userInfo) {
-      history.push("/markets");
+      history.push("../components/Maincontent.jsx");
     }
   }, [history, userInfo]);
 
@@ -34,7 +34,7 @@ const LoginScreen = ({ history }) => {
     {
         console.log(res.data);
         console.log(res.status);
-        if (res.status == 200) {
+        if (res.status === 200) {
             alert("Login Successful");
         }
         else alert("Login Failed");
@@ -56,6 +56,7 @@ const LoginScreen = ({ history }) => {
             <Form.Control
               type="email"
               value={email}
+              required
               placeholder="Enter email"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -65,6 +66,7 @@ const LoginScreen = ({ history }) => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
+              required
               value={password}
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}

@@ -11,6 +11,7 @@ import Signup from "./pages/Signup"
 import Menu from './pages/menu';
 import RegisterScreen from './pages/RegisterScreen';
 import LoginScreen from './pages/LoginScreen';
+import Header from './components/Header';
 
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
   return (
    <>
     <Router>
-      <Landing/>
+      {/* <Landing/> */}
+      <Header/>
       <Routes>
       <Route  path="/" element={<Maincontent/>} />
       {/* <Route  path="/login" element={<Login/>} /> */}

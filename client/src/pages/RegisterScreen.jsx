@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { Provider, useDispatch, useSelector } from "react-redux";
+// import { Provider, useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
-import { register } from "../actions/userActions";
+//import { register } from "../actions/userActions";
 import MainScreen from "../components/MainScreen";
 import "./RegisterScreen.css";
 import axios from "axios";
@@ -17,7 +18,7 @@ const RegisterScreen = ({ history }) => {
   const [confirmpassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
 
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
@@ -63,6 +64,7 @@ const RegisterScreen = ({ history }) => {
             <Form.Control
               type="name"
               value={name}
+              required
               placeholder="Enter name"
               onChange={(e) => setName(e.target.value)}
             />
@@ -73,6 +75,7 @@ const RegisterScreen = ({ history }) => {
             <Form.Control
               type="email"
               value={email}
+              required
               placeholder="Enter email"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -83,6 +86,7 @@ const RegisterScreen = ({ history }) => {
             <Form.Control
               type="password"
               value={password}
+              required
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -93,6 +97,7 @@ const RegisterScreen = ({ history }) => {
             <Form.Control
               type="password"
               value={confirmpassword}
+              required
               placeholder="Confirm Password"
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
