@@ -2,12 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Mynavbar from './components/Mynavbar';
-import Landing from './components/Landing';
 import Maincontent from './components/Maincontent';
 import Footer from './components/Footer';
-//import Login from './pages/Login';
-import Signup from "./pages/Signup"
 import Menu from './pages/menu';
 import RegisterScreen from './pages/RegisterScreen';
 import LoginScreen from './pages/LoginScreen';

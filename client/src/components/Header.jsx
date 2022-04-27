@@ -1,70 +1,62 @@
-import React, { useEffect } from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import {Link, NavLink} from 'react-router-dom'
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
-import { logout } from "../actions/userActions";
+import { Link, NavLink } from 'react-router-dom'
+
 
 const Header = ({ setSearch }) => {
-  const dispatch = useDispatch();
-  const history = useNavigate();
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+    const userInfo = JSON.parse(localStorage.getItem('user')) || "";
+    const logoutHandler = () => {
+        localStorage.removeItem("user");
+        window.location.replace("http://localhost:3000/");
+    };
 
-  const logoutHandler = () => {
-    dispatch(logout());
-    history.push("/");
-  };
+    return (
+        <Navbar collapseOnSelect expand="lg"  variant="light" style={{
+            'backgroundColor' : '#f6b319'
+        }}>
+        <Container>
+        <NavLink to={"/"}> <Navbar.Brand href="/" style={{color:"darkblue",fontStyle:"italic",textTransform:"uppercase",textShadow: "2px 2px rgb(185, 98, 98)"}}><h2 className="text-center">Blue Nile Restaurant</h2></Navbar.Brand></NavLink>
 
-  useEffect(() => {}, [userInfo]);
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="m-auto"></Nav>
 
-  return (
-    <Navbar collapseOnSelect expand="lg" bg="#f6b319" variant="dark">
-      <Container>
-       <NavLink to={"/"}> <Navbar.Brand href="/" style={{color:"darkblue",fontStyle:"italic",textTransform:"uppercase",textShadow: "2px 2px rgb(185, 98, 98)"}}><h2 className="text-center">Blue Nile Restaurant</h2></Navbar.Brand></NavLink>
+                <Nav>
 
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="m-auto"></Nav>
+                {userInfo? (
+                <>
+                    <Nav.Link href="/">Home page</Nav.Link>
+                    <NavDropdown
+                    title={`${userInfo.email}`}
+                    id="collasible-nav-dropdown"
+                    >
+                    <NavDropdown.Item>
+                        <img
+                        alt=".."
+                        src={
+                            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+                        }
+                        width="25"
+                        height="25"
+                        style={{ marginRight: 10 }}
+                        />
+                        My Profile
+                    </NavDropdown.Item>
 
-          <Nav>
-            {/* <Nav.Link href="/markets">Markets</Nav.Link>
-            <Nav.Link href="/news">News</Nav.Link> */}
-            {userInfo ? (
-              <>
-                <Nav.Link href="/Maincontent">Home page</Nav.Link>
-                <NavDropdown
-                  title={`${userInfo.name}`}
-                  id="collasible-nav-dropdown"
-                >
-                  <NavDropdown.Item>
-                    <img
-                      alt=".."
-                      src={
-                        "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
-                      }
-                      width="25"
-                      height="25"
-                      style={{ marginRight: 10 }}
-                    />
-                    My Profile
-                  </NavDropdown.Item>
-
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </>
-            ) : (
-              <NavLink to={"/login"}  style={{color:"white",fontWeight:"bold",fontSize:"20px"}}>Login</NavLink>
-            )}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  );
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item onClick={logoutHandler}>
+                        Logout
+                    </NavDropdown.Item>
+                    </NavDropdown>
+                </>
+                ) : (
+                <NavLink to={"/login"}  style={{color:"white",fontWeight:"bold",fontSize:"20px"}}>Login</NavLink>
+                )}
+            </Nav>
+            </Navbar.Collapse>
+        </Container>
+        </Navbar>
+    );
 };
 
 export default Header;

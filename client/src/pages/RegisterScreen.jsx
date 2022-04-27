@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
-// import { Provider, useDispatch, useSelector } from "react-redux";
+import { Provider, useDispatch} from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
-//import { register } from "../actions/userActions";
+
 import MainScreen from "../components/MainScreen";
 import "./RegisterScreen.css";
 import axios from "axios";
@@ -18,7 +18,7 @@ const RegisterScreen = ({ history }) => {
   const [confirmpassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
 
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
@@ -42,11 +42,12 @@ const RegisterScreen = ({ history }) => {
         }
         await axios.post('http://localhost:5000/users/RegisterScreen', body).then((res) =>
             {
-                console.log(res.data);
-                
-               
+                localStorage.setItem("user", JSON.stringify(body));
+                window.location.replace("http://localhost:3000/");
+                alert("Register Successful");
+            
             }).catch((e) => {
-                console.log("Error :- ", e);
+                alert("There is an account with entered email");
             })
     }
   };
