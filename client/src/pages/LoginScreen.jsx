@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
-import { login } from "../actions/userActions";
 import MainScreen from "../components/MainScreen";
 import "./LoginScreen.css";
 import axios from "axios";
@@ -19,7 +18,7 @@ const LoginScreen = ({ history }) => {
 
   useEffect(() => {
     if (userInfo) {
-      history.push("/markets");
+    //   history.push("../components/Maincontent.jsx");
     }
   }, [history, userInfo]);
 
@@ -34,6 +33,8 @@ const LoginScreen = ({ history }) => {
             console.log(res.data);
             console.log(res.status);
             if (res.status == 200) {
+                localStorage.setItem("user", JSON.stringify(body));
+                window.location.replace("http://localhost:3000/menu");
                 alert("Login Successful");
             }
             else alert("Login Failed");
@@ -55,6 +56,7 @@ const LoginScreen = ({ history }) => {
             <Form.Control
               type="email"
               value={email}
+              required
               placeholder="Enter email"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -64,6 +66,7 @@ const LoginScreen = ({ history }) => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
+              required
               value={password}
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
