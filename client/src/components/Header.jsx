@@ -7,6 +7,7 @@ const Header = ({ setSearch }) => {
     const userInfo = JSON.parse(localStorage.getItem('user')) || "";
     const logoutHandler = () => {
         localStorage.removeItem("user");
+        localStorage.removeItem("selectedItem");
         window.location.replace("http://localhost:3000/");
     };
 

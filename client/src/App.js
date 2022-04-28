@@ -8,7 +8,7 @@ import Menu from './pages/menu';
 import RegisterScreen from './pages/RegisterScreen';
 import LoginScreen from './pages/LoginScreen';
 import Header from './components/Header';
-
+import PlaceOrder from './pages/placeOrder';
 
 function App() {
 
@@ -25,7 +25,8 @@ function App() {
       <Route  path="/RegisterScreen" element={<RegisterScreen/>} />
       <Route  path="/login" element={<LoginScreen/>} />
       {/* <Route path="/menu" render={() => <Menu menuitems={menuitems}/>} /> */}
-      <Route path="/menu" element={<Menu/>}/>
+                  <Route path="/menu" element={<Menu />} />
+                  <Route path="/placeOrder" element={<PlaceOrder/>}/>
       </Routes>
       <Footer/>
     </Router>

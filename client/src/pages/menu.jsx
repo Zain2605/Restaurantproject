@@ -1,33 +1,61 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Menu() {
-  const [menuitems, setmenuitems] = useState([]);
+    const [menuitems, setmenuitems] = useState([]);
+    
+    
+    
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/menu")
-      .then((res) => setmenuitems(res.data))
-      .catch((error) => console.log(error));
-  }, []);
+    useEffect(() => {
+        axios
+        .get("http://localhost:5000/menu")
+        .then((res) => setmenuitems(res.data))
+        .catch((error) => console.log(error));
+    }, []);
 
-  // let [num, setNum] = useState(0);
-  // let incNum = () => {
-  //     if (num < 10) {
-  //         setNum(Number(num) + 1);
-  //     }
-  // };
-  // let decNum = () => {
-  //     if (num > 0) {
-  //         setNum(num - 1);
-  //     }
-  // }
-  // let handleChange = (e) => {
-  //     setNum(e.target.value);
-  // }
+    const [checkedState, setCheckedState] = useState(
+        new Array(10).fill(false)
+    );
+    
+    const placeOrderHandler = () => {
+        let count = menuitems.length;
+        let c = 0;
+        const body = [];
+        for (let i = 0;i<count ; ++i)
+        {
+            if (checkedState[i] == true)
+            {
+                c++;
+                body.push(menuitems[i].Name);
+                
+            }
+        }
+        if (c === 0)
+        {
+            alert("Select at least one item ");
+            return ; 
+        }
+        
+        localStorage.setItem("selectedItem", JSON.stringify(body));
+        window.location.replace("http://localhost:3000/placeOrder");
+        console.log(body);
+        console.log(checkedState);
+    };
 
-  return (
+    const handleOnChange = (position) => {
+        const updatedCheckedState = checkedState.map((item, index) =>
+          index === position ? !item : item
+        );
+    
+        setCheckedState(updatedCheckedState);
+    
+        
+      };
+    
+    return (
     <>
       <div className="container mt-5">
         <table className="table table-bordered table-hover">
@@ -46,7 +74,7 @@ export default function Menu() {
                 Price
               </th>
               <th className="text-center" scope="col">
-                Quantity
+                Select
               </th>
             </tr>
           </thead>
@@ -59,56 +87,15 @@ export default function Menu() {
                   <td className="text-center">{item.Category}</td>
                   <td className="text-center">{item.Price}</td>
                   <td>
-                    {/* <div className="d-flex row"> */}
-
-                    {/* <button class="btn btn-outline-primary" type="button" onClick={decNum}>-</button>
-                        
-                        <input type="text" class="form-control" value={num} onChange={handleChange}/>
-                        
-                        
-                        <button class="btn btn-outline-primary" type="button" onClick={incNum}>+</button> */}
-                    {/* <div className="text-center">
-                        <button type="button" class="btn btn-primary w-50 ">Add to cart</button>
-                        </div> */}
-
-                    {/* </div> */}
-                    {/* <div class="form-group text-center">
-                      <label for="exampleFormControlSelect1">
-                        
-                      </label>
-                      <select
-                        class=" custom-select"
-                        id="exampleFormControlSelect1"
-                      >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </select>
-                    </div> */}
-
                     <div class="form-row">
-                      {/* <div class="col-7">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="City"
-                        />
-                      </div>
+                     
                       <div class="col">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="State"
-                        />
-                      </div> */}
-                      <div class="col">
-                        <input
-                          type="number"
-                          min='0'
-                          class="form-control"
-                          placeholder="0"
+                      <input
+                        type="checkbox"
+                        id={`custom-checkbox-${key}`}
+                        
+                        checked={checkedState[key]}
+                        onChange={() => handleOnChange(key)}
                         />
                       </div>
                     </div>
@@ -116,29 +103,10 @@ export default function Menu() {
                 </tr>
               );
             })}
-
-            {/* <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr> */}
           </tbody>
         </table>
         <div className="text-center">
-          <button type="button" class="btn btn-primary w-50 ">
+          <button type="button" class="btn btn-primary w-50" onClick={placeOrderHandler}>
             Place Order
           </button>
         </div>
