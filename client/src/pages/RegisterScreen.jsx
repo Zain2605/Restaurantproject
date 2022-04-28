@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { Provider, useDispatch} from "react-redux";
+//import { useDispatch} from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
@@ -18,7 +18,7 @@ const RegisterScreen = ({ history }) => {
   const [confirmpassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
 
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 

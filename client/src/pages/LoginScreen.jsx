@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
@@ -13,7 +13,7 @@ const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
 
@@ -33,7 +33,7 @@ const LoginScreen = ({ history }) => {
         await axios.post('http://localhost:5000/users/login', body).then((res) => {
             console.log(res.data);
             console.log(res.status);
-            if (res.status == 200) {
+            if (res.status === 200) {
                 localStorage.setItem("user", JSON.stringify(body));
                 window.location.replace("http://localhost:3000/menu");
                 alert("Login Successful");

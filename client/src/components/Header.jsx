@@ -1,5 +1,5 @@
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { Link, NavLink } from 'react-router-dom'
+import {  NavLink } from 'react-router-dom'
 
 
 const Header = ({ setSearch }) => {
@@ -26,9 +26,9 @@ const Header = ({ setSearch }) => {
 
                 {userInfo? (
                 <>
-                    <Nav.Link href="/">Home page</Nav.Link>
+                    {/* <Nav.Link href="/">Home page</Nav.Link> */}
                     <NavDropdown
-                    title={`${userInfo.email}`}
+                    title={`${userInfo.name}`}
                     id="collasible-nav-dropdown"
                     >
                     <NavDropdown.Item>

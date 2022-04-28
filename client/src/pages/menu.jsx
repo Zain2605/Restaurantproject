@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 export default function Menu() {
     const [menuitems, setmenuitems] = useState([]);
@@ -23,13 +23,18 @@ export default function Menu() {
     const placeOrderHandler = () => {
         let count = menuitems.length;
         let c = 0;
+        let orderid=0
         const body = [];
         for (let i = 0;i<count ; ++i)
         {
-            if (checkedState[i] == true)
+            if (checkedState[i] === true)
             {
                 c++;
-                body.push(menuitems[i].Name);
+                orderid=Math.floor((Math.random() * 1000) + 1);
+                
+                body.push([menuitems[i].Name, menuitems[i].Price]);
+                // const orderid = require('order-id');
+                // const id = orderid.generate();
                 
             }
         }
@@ -38,7 +43,7 @@ export default function Menu() {
             alert("Select at least one item ");
             return ; 
         }
-        
+        localStorage.setItem("orderid",orderid);
         localStorage.setItem("selectedItem", JSON.stringify(body));
         window.location.replace("http://localhost:3000/placeOrder");
         console.log(body);
@@ -87,9 +92,9 @@ export default function Menu() {
                   <td className="text-center">{item.Category}</td>
                   <td className="text-center">{item.Price}</td>
                   <td>
-                    <div class="form-row">
+                    <div className="form-row">
                      
-                      <div class="col">
+                      <div className="col">
                       <input
                         type="checkbox"
                         id={`custom-checkbox-${key}`}
@@ -106,7 +111,7 @@ export default function Menu() {
           </tbody>
         </table>
         <div className="text-center">
-          <button type="button" class="btn btn-primary w-50" onClick={placeOrderHandler}>
+          <button type="button" className="btn btn-primary w-50" onClick={placeOrderHandler}>
             Place Order
           </button>
         </div>
